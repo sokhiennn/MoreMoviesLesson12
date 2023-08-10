@@ -51,12 +51,11 @@
         android:text="Rating"
         android:textStyle="bold"/>
 
-    <EditText
-        android:id="@+id/editRating"
+    <!-- Spinner for selecting movie rating -->
+    <Spinner
+        android:id="@+id/spinnerRating"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter rating here"
-        android:inputType="text" />
+        android:layout_height="wrap_content" />
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -1,7 +1,9 @@
 package sg.edu.rp.c346.id22013179.mymoviesapplication;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,7 +14,7 @@ import android.widget.TextView;
 public class ThirdActivity extends AppCompatActivity {
 
     TextView tvMovieID,tvMovieTitle,tvGenres,tvYears,tvRatings;
-    EditText etMovieID, etMovieTitle, etGenres, etYears,etRatings;
+    EditText etMovieTitle, etGenres, etYears,etRatings;
     Button btnUpdate, btnDelete, btnCancel;
 
     Movie movie;
@@ -28,7 +30,6 @@ public class ThirdActivity extends AppCompatActivity {
         tvGenres = findViewById(R.id.tvGenres);
         tvYears= findViewById(R.id.tvYears);
         tvRatings = findViewById(R.id.tvRatings);
-        etMovieID = findViewById(R.id.etMovieID);
         etMovieTitle = findViewById(R.id.etMovieTitle);
         etGenres = findViewById(R.id.etGenres);
         etYears = findViewById(R.id.etYears);
@@ -61,8 +62,19 @@ public class ThirdActivity extends AppCompatActivity {
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dbHelper.deleteMovies(movie.getId());
-                finish();
+                AlertDialog.Builder builder = new AlertDialog.Builder(ThirdActivity.this);
+                builder.setTitle("Confirm Deletion");
+                builder.setMessage("Are you sure you want to delete this movie?");
+                builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dbHelper.deleteMovies(movie.getId());
+                                finish();
+                            }
+                        });
+                builder.setNegativeButton("Cancel", null);
+                AlertDialog dialog = builder.create();
+                dialog.show();
             }
         });
     }

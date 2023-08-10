@@ -138,5 +138,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.delete(TABLE_MOVIE, selection, selectionArgs);
         db.close();
 
+
+
     }
 }
